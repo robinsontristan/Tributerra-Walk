@@ -478,7 +478,7 @@ Transform:
   - {fileID: 458515111215834601}
   - {fileID: 458515109678468277}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 146.66, z: 0}
 --- !u!114 &458515110586240401
 MonoBehaviour:
@@ -717,6 +717,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14a38bcd478a42543908ea2d82affa99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  crouchButton: {fileID: -7930873346184672893, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
+  crouchHeight: 0.7
+  crouchDuration: 0.22
+  cameraOffsetTransform: {fileID: 458515111215834601}
   whisp: {fileID: 0}
 --- !u!143 &7157512017672950493
 CharacterController:
