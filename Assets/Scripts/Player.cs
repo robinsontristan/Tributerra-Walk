@@ -79,6 +79,11 @@ public class Player : MonoBehaviour
         return transform.localPosition;
     }
 
+    public void CalculateAngle()
+    {
+        
+    }
+
     public void StartPath(Vector3 startPosition, Vector3 endPosition)
     {
         whisp.StartTravel(startPosition, endPosition);
