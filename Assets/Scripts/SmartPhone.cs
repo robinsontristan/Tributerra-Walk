@@ -34,4 +34,9 @@ public class SmartPhone : MonoBehaviour
     {
         GameManager.instance.PlayClip(phoneSounds[0], audioSource);
     }
+
+    public void PlayAudio(AudioClip clip)
+    {
+        audioSource.PlayOneShot(clip);
+    }
 }
