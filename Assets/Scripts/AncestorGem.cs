@@ -12,10 +12,10 @@ public class AncestorGem : MonoBehaviour
     [SerializeField]
     private WillOfAWhisp willOfAWhisp;
 
-    // Start is called before the first frame update
-    void Awake()
+    
+    void Start()
     {
-        gemColor = gemRenderer.GetComponent<Material>().color;
+        gemColor = GetComponent<Renderer>().material.color; //gemRenderer.GetComponent<Material>().color;
     }
 
     public void ChangeColor()
@@ -30,7 +30,7 @@ public class AncestorGem : MonoBehaviour
 
         newGradient.SetKeys(colorKey, alphaKey);
 
-        var main = willOfAWhisp.GetComponent<ParticleSystem>().main;
+        var main = willOfAWhisp.GetComponentInChildren<ParticleSystem>().main;
         main.startColor = gemColor;
     }
 }

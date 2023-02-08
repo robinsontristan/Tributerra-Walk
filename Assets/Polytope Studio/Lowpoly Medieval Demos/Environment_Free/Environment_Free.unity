@@ -1440,6 +1440,10 @@ PrefabInstance:
       propertyPath: willOfAWhisp
       value: 
       objectReference: {fileID: 1018427656}
+    - target: {fileID: 1433160670, guid: 6f8b227a294a042a1b5c03e15e9be2eb, type: 3}
+      propertyPath: waypointParent
+      value: 
+      objectReference: {fileID: 1654260083}
     - target: {fileID: 1433160671, guid: 6f8b227a294a042a1b5c03e15e9be2eb, type: 3}
       propertyPath: m_InteractionManager
       value: 

@@ -12,7 +12,6 @@ public class WillOfAWhisp : MonoBehaviour
     public bool startPath = false;
     public int targetWaypointIndex = 0;
     public Action<Vector3> OnEndReached;
-    public ParticleSystem particleSystem;
     void Start()
     {
 

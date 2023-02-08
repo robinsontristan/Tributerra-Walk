@@ -29,15 +29,16 @@ public class Waypoint : MonoBehaviour
 
                 Player.Instance.PlayerWaypointIndex = WaypointIndex;
 
+                if (NextWaypointIndex >= parentTransform.childCount)
+                {
+                    NextWaypointIndex = null;
+
+                }
                 Player.Instance.NextPlayerWaypointIndex = NextWaypointIndex;
 
             }
 
-            if(NextWaypointIndex >= parentTransform.childCount)
-            {
-                NextWaypointIndex = null;
-
-            }
+            
         }
     }
 
