@@ -6,22 +6,15 @@ using System;
 
 public class WillOfAWhisp : MonoBehaviour
 {
-    public Transform waypointHolder;
     public float travelDuration = 5f;
     public float waitTime = 1f;
     public float speed = 1f;
-    private Vector3[] waypoints;
     public bool startPath = false;
     public int targetWaypointIndex = 0;
     public Action<Vector3> OnEndReached;
     public ParticleSystem particleSystem;
     void Start()
     {
-        waypoints = new Vector3[waypointHolder.childCount];
-        for (int i = 0; i < waypoints.Length; i++)
-        {
-            waypoints[i] = waypointHolder.GetChild(i).position;
-        }
 
         //For testing...remove this "StartPath" line when building to device.
         //startPath = true;
@@ -31,7 +24,7 @@ public class WillOfAWhisp : MonoBehaviour
 
     public void StartPath()
     {
-        StartCoroutine(FollowPath(waypoints, startPath));
+       // StartCoroutine(FollowPath(waypoints, startPath));
     }
     private IEnumerator FollowPath(Vector3[] wayPoints, bool start)
     {
@@ -82,16 +75,5 @@ public class WillOfAWhisp : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
 
-    }
-    private void OnDrawGizmos()
-    {
-        Vector3 startPosition = waypointHolder.GetChild(0).position;
-        Vector3 previousPosition = startPosition;
-        foreach (Transform waypoint in waypointHolder)
-        {
-            Gizmos.DrawSphere(waypoint.position, 0.3f);
-            Gizmos.DrawLine(previousPosition, waypoint.position);
-            previousPosition = waypoint.position;
-        }
     }
 }

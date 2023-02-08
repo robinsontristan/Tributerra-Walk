@@ -26,14 +26,16 @@ public class Waypoint : MonoBehaviour
             {
                 WaypointIndex = i;
                 NextWaypointIndex = i + 1;
-                Debug.Log("Waypoint index is" + WaypointIndex);
+
+                Player.Instance.PlayerWaypointIndex = WaypointIndex;
+
+                Player.Instance.NextPlayerWaypointIndex = NextWaypointIndex;
 
             }
 
             if(NextWaypointIndex >= parentTransform.childCount)
             {
                 NextWaypointIndex = null;
-                Debug.Log("Next waypoint index is" + NextWaypointIndex);
 
             }
         }
@@ -43,21 +45,24 @@ public class Waypoint : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            Player.Instance.PlayerWaypointIndex = WaypointIndex;
-
-            if(!NextWaypointIndex.HasValue)
-            {
-                OnEndReached?.Invoke(WaypointPosition());
-            }
-            else
-            {
-                Player.Instance.StartPath(WaypointPosition(), NextWaypointPosition());
-            }
-
+            DoTravel();
         }
     }
 
+    public void DoTravel()
+    {
+        Player.Instance.PlayerWaypointIndex = WaypointIndex;
 
+        if (!NextWaypointIndex.HasValue)
+        {
+            OnEndReached?.Invoke(WaypointPosition());
+        }
+        else
+        {
+            willOfAWhisp.StartTravel(WaypointPosition(), NextWaypointPosition());
+        }
+
+    }
 
     public Vector3 WaypointPosition()
     {

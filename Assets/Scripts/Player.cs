@@ -26,6 +26,12 @@ public class Player : MonoBehaviour
         set;
     }
 
+    public int? NextPlayerWaypointIndex
+    {
+        get;
+        set;
+    }
+
     public WillOfAWhisp whisp;
 
     void Awake()
@@ -83,6 +89,7 @@ public class Player : MonoBehaviour
     {
         
     }
+
 
     public void StartPath(Vector3 startPosition, Vector3 endPosition)
     {
