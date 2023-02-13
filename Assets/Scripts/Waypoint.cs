@@ -7,6 +7,11 @@ public class Waypoint : MonoBehaviour
 {
     [SerializeField]
     private Transform parentTransform;
+    [SerializeField]
+    private AudioSource audioSource;
+    [SerializeField]
+    private AudioClip waypointClip;
+
     public WillOfAWhisp willOfAWhisp;
     public Action<Vector3> OnEndReached;
 
@@ -53,6 +58,7 @@ public class Waypoint : MonoBehaviour
     public void DoTravel()
     {
         Player.Instance.PlayerWaypointIndex = WaypointIndex;
+        audioSource.PlayOneShot(waypointClip);
 
         if (!NextWaypointIndex.HasValue)
         {
