@@ -62,6 +62,7 @@ public class Waypoint : MonoBehaviour
 
         if (!NextWaypointIndex.HasValue)
         {
+            willOfAWhisp.gameObject.SetActive(false);
             OnEndReached?.Invoke(WaypointPosition());
         }
         else

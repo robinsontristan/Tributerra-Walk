@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class WaypointParent : MonoBehaviour
 {
-
     public Transform waypointHolder;
+    public Color waypointsColor;
     private Vector3[] waypoints;
 
 
@@ -20,12 +20,13 @@ public class WaypointParent : MonoBehaviour
 
     }
 
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmos()
     {
         Vector3 startPosition = waypointHolder.GetChild(0).position;
         Vector3 previousPosition = startPosition;
         foreach (Transform waypoint in waypointHolder)
         {
+            Gizmos.color = waypointsColor;
             Gizmos.DrawSphere(waypoint.position, 0.3f);
             Gizmos.DrawLine(previousPosition, waypoint.position);
             previousPosition = waypoint.position;
