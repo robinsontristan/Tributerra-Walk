@@ -20,13 +20,21 @@ public class AncestorPopup : MonoBehaviour
     {
         SmartPhone.instance.Setup(this);
         ancestorPrefab.SetActive(true);
+        StartCoroutine(DelayAncestorSound());
 
-        // play smart phone audio
-        SmartPhone.instance.PlayAudio(ancestorClip);
 
         ancestorPrefab.transform.localPosition += offset;
 
         ancestorPrefab.transform.LookAt(Player.Instance.transform);
+    }
+
+    private IEnumerator DelayAncestorSound()
+    {
+        yield return new WaitForSeconds(2f);
+
+        // play smart phone audio
+        SmartPhone.instance.PlayAudio(ancestorClip);
+
     }
     private void HideAncestor()
     {
