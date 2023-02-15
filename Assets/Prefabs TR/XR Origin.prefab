@@ -2984,8 +2984,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7945002526788293285}
   - {fileID: 384417710200904398}
+  - {fileID: 7945002526788293285}
   - {fileID: 458515109584460128}
   - {fileID: 816484214}
   m_Father: {fileID: 458515111215834601}
@@ -3094,7 +3094,7 @@ Transform:
   - {fileID: 458515111215834601}
   - {fileID: 458515109678468277}
   m_Father: {fileID: 0}
-  m_RootOrder: 25
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 146.66, z: 0}
 --- !u!114 &458515110586240401
 MonoBehaviour:
@@ -3416,7 +3416,7 @@ MonoBehaviour:
     m_Reference: {fileID: 1010738217276881514, guid: c348712bda248c246b8c49b3db54643f,
       type: 3}
   m_RightHandSnapTurnAction:
-    m_UseReference: 1
+    m_UseReference: 0
     m_Action:
       m_Name: Right Hand Snap Turn
       m_Type: 0
@@ -3452,6 +3452,7 @@ MonoBehaviour:
   continuousControlScheme: Continuous Move
   continuousMoveProvider: {fileID: 458515110586240405}
   continuousTurnProvider: {fileID: 458515110586240393}
+  teleportationProvider: {fileID: 3100898484132341440}
   snapTurnProvider: {fileID: 8807378706620423101}
   headForwardSource: {fileID: 458515111197776750}
   leftHandForwardSource: {fileID: 8398277691452580677}
@@ -3516,8 +3517,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8398277691452580677}
   - {fileID: 7188716861069257625}
+  - {fileID: 8398277691452580677}
   m_Father: {fileID: 458515111215834601}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -61,6 +61,9 @@ public class LocomotionManager : MonoBehaviour
     private ContinuousTurnProviderBase continuousTurnProvider;
 
     [SerializeField]
+    private TeleportationProvider teleportationProvider;
+
+    [SerializeField]
     private SnapTurnProviderBase snapTurnProvider;
 
     [SerializeField]
@@ -101,6 +104,9 @@ public class LocomotionManager : MonoBehaviour
                 if (continuousMoveProvider != null)
                 {
                     continuousMoveProvider.enabled = false;
+                    teleportationProvider.enabled = true;
+                    TeleportSource(leftHandForwardSource).SetActive(true);
+                    TeleportSource(rightHandForwardSource).SetActive(true);
                 }
 
                 break;
@@ -109,12 +115,20 @@ public class LocomotionManager : MonoBehaviour
                 if (continuousMoveProvider != null)
                 {
                     continuousMoveProvider.enabled = true;
+                    teleportationProvider.enabled = false;
+                    TeleportSource(leftHandForwardSource).SetActive(false);
+                    TeleportSource(rightHandForwardSource).SetActive(false);
                 }
 
                 break;
             default:
                 throw new InvalidEnumArgumentException(nameof(scheme), (int)scheme, typeof(MoveScheme));
         }
+    }
+
+    private GameObject TeleportSource(Transform transform)
+    {
+        return transform.parent.GetChild(0).gameObject;
     }
 
     private void SetTurnStyle(TurnStyle style)
