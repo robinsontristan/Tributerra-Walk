@@ -8,6 +8,9 @@ public class SmartPhone : MonoBehaviour
     public static SmartPhone instance;
     private AudioSource audioSource;
     [SerializeField] private List<AudioClip> phoneSounds = new List<AudioClip>();
+    private Coroutine phoneCoroutine = null;
+
+
     public AncestorPopup Ancestor
     {
         get;
@@ -25,18 +28,47 @@ public class SmartPhone : MonoBehaviour
         if(newAncestor)
         {
             Ancestor = newAncestor;
-            PhoneNotification();
         }
 
     }
 
-    private void PhoneNotification( )
+    public Coroutine PhoneNotification(AudioClip clip)
+
     {
-        GameManager.instance.PlayClip(phoneSounds[0], audioSource);
+        if (phoneCoroutine != null)
+        {
+            StopCoroutine(phoneCoroutine);
+        }
+        phoneCoroutine = StartCoroutine(PlayAudio(clip, clip.length));
+        return phoneCoroutine;
+
+
     }
 
-    public void PlayAudio(AudioClip clip)
+    public IEnumerator  PlayAudio(AudioClip clip, float waittime)
     {
         audioSource.PlayOneShot(clip);
+        yield return new WaitForSeconds(waittime);
+        StopAudio();
+
+    }
+
+    public void StopAudio()
+    {
+        if(phoneCoroutine == null)
+        {
+            return;
+        }
+
+        if(audioSource.isPlaying)
+        {
+            audioSource.Stop();
+        }
+        if(phoneCoroutine != null)
+        {
+            StopCoroutine(phoneCoroutine);
+        }
+
+        phoneCoroutine = null;
     }
 }

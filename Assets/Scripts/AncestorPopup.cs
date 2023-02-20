@@ -9,6 +9,7 @@ public class AncestorPopup : MonoBehaviour
     public Vector3 offset;
     public GameObject ancestorPrefab;
     public AudioClip ancestorClip;
+    public AudioClip ancestorRing;
     
     void Start()
     {
@@ -18,22 +19,24 @@ public class AncestorPopup : MonoBehaviour
 
     private void ShowAncestor(Vector3 position)
     {
+        ancestorPrefab.transform.localPosition += offset;
+        ancestorPrefab.transform.LookAt(Player.Instance.transform);
+
         SmartPhone.instance.Setup(this);
         ancestorPrefab.SetActive(true);
-        StartCoroutine(DelayAncestorSound());
+        SmartPhone.instance.PhoneNotification(ancestorRing);
+        StartCoroutine(PlayAncestorClip(ancestorRing.length));
 
 
-        ancestorPrefab.transform.localPosition += offset;
-
-        ancestorPrefab.transform.LookAt(Player.Instance.transform);
     }
 
-    private IEnumerator DelayAncestorSound()
+     
+    private IEnumerator PlayAncestorClip (float wait)
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(wait);
 
         // play smart phone audio
-        SmartPhone.instance.PlayAudio(ancestorClip);
+        SmartPhone.instance.PhoneNotification(ancestorClip);
 
     }
     private void HideAncestor()
