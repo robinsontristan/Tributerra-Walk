@@ -55,11 +55,16 @@ public class Player : MonoBehaviour
     {
         crouch = !crouch;
         
+        // TODO: fix crouch!
         if (crouch)
         {
             this.crouchPosition = cameraOffsetTransform.position;
-            Vector3 crouchPosition = new Vector3(cameraOffsetTransform.position.x, cameraOffsetTransform.position.y - crouchHeight, cameraOffsetTransform.position.z);
-            StartCoroutine(CrouchUnCrouch(cameraOffsetTransform.position, crouchPosition));
+            if(Physics.Raycast(crouchPosition,Vector3.down, out RaycastHit hit))
+            {
+                Vector3 crouchPosition = new Vector3(cameraOffsetTransform.position.x, cameraOffsetTransform.position.y - hit.point.y + crouchHeight, cameraOffsetTransform.position.z);
+                StartCoroutine(CrouchUnCrouch(cameraOffsetTransform.position, crouchPosition));
+            }
+            
         }
         else
         {
