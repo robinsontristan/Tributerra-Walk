@@ -12,8 +12,8 @@ public class Player : MonoBehaviour
     public float crouchDuration = 0.75f;
     public Transform cameraOffsetTransform;
 
-    private bool crouch = false;
-    private Vector3 crouchPosition;
+    public bool crouch = false;
+    private Vector3 headPosition;
     public static Player Instance
     {
         get;
@@ -58,18 +58,21 @@ public class Player : MonoBehaviour
         // TODO: fix crouch!
         if (crouch)
         {
-            this.crouchPosition = cameraOffsetTransform.position;
-            if(Physics.Raycast(crouchPosition,Vector3.down, out RaycastHit hit))
+            headPosition = Camera.main.transform.position;
+            if(Physics.Raycast(headPosition, Vector3.down, out RaycastHit hit))
             {
-                Vector3 newCrouchPosition = new Vector3(cameraOffsetTransform.position.x, cameraOffsetTransform.position.y - hit.point.y - crouchHeight, cameraOffsetTransform.position.z);
-                StartCoroutine(CrouchUnCrouch(cameraOffsetTransform.position, newCrouchPosition));
+                var distance = hit.point - headPosition;
+                Debug.Log($"Hit position is {hit.point} and crouch y position is {distance.y} ");
+                Vector3 newCrouchPosition = new Vector3(cameraOffsetTransform.localPosition.x, distance.y - crouchHeight, cameraOffsetTransform.localPosition.z);
+                Debug.Log($"the crouch position is {newCrouchPosition}");
+                StartCoroutine(CrouchUnCrouch(cameraOffsetTransform.localPosition, newCrouchPosition));
             }
             
         }
         else
         {
-            Vector3 uncrouch = this.crouchPosition;
-            StartCoroutine(CrouchUnCrouch(cameraOffsetTransform.position, uncrouch));
+            Vector3 uncrouch = new Vector3(0,0,0);
+            StartCoroutine(CrouchUnCrouch(cameraOffsetTransform.localPosition, uncrouch));
         }
     }
 
@@ -80,7 +83,7 @@ public class Player : MonoBehaviour
         {
             elapsedTime += Time.deltaTime;
             Vector3 lerpPosition = Vector3.Lerp(startPosition, endPosition, elapsedTime / crouchDuration);
-            cameraOffsetTransform.position = lerpPosition;
+            cameraOffsetTransform.localPosition = lerpPosition;
             yield return new WaitForEndOfFrame();
         }
     }
